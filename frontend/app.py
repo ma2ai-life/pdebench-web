@@ -290,7 +290,7 @@ with tab1:
         
         with col2:
             st.image(
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Heat_eqn.gif/400px-Heat_eqn.gif",
+                "https://en.wikipedia.org/wiki/Burgers%27_equation#/media/File:Burgers_equation.gif",
                 caption="Heat Equation Solution Evolution",
                 use_container_width=True
             )

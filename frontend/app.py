@@ -265,7 +265,7 @@ with tab1:
         
         with col2:
             st.image(
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Burgers_equation.gif/400px-Burgers_equation.gif",
+                "https://en.wikipedia.org/wiki/Burgers%27_equation#/media/File:Burgers_equation.gif",
                 caption="Burgers' Equation Solution Evolution",
                 use_container_width=True
             )

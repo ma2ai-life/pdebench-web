@@ -381,9 +381,9 @@ with tab1:
                 
                 # Metrics Section
                 st.markdown("### 📊 Performance Metrics")
-                
+
                 col1, col2, col3, col4 = st.columns(4)
-                
+
                 with col1:
                     st.markdown('<div class="metric-card">', unsafe_allow_html=True)
                     st.metric(
@@ -392,7 +392,7 @@ with tab1:
                         help="L2 norm of final solution"
                     )
                     st.markdown('</div>', unsafe_allow_html=True)
-                
+
                 with col2:
                     st.markdown('<div class="metric-card">', unsafe_allow_html=True)
                     st.metric(
@@ -402,17 +402,32 @@ with tab1:
                         help="Maximum amplitude"
                     )
                     st.markdown('</div>', unsafe_allow_html=True)
-                
+
                 with col3:
                     st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+                    # FIXED: Use numpy.trapz correctly
+                    try:
+                        # Try numpy's trapz
+                        initial_energy = np.trapz(u[0, :]**2, x)
+                        final_energy = np.trapz(u[-1, :]**2, x)
+                        energy_text = f"{final_energy:.4f}"
+                        energy_delta = f"{final_energy - initial_energy:.4f}"
+                    except AttributeError:
+                        # Fallback to manual trapezoidal rule
+                        dx = x[1] - x[0]
+                        initial_energy = np.sum((u[0, :-1]**2 + u[0, 1:]**2) / 2 * dx)
+                        final_energy = np.sum((u[-1, :-1]**2 + u[-1, 1:]**2) / 2 * dx)
+                        energy_text = f"{final_energy:.4f}"
+                        energy_delta = f"{final_energy - initial_energy:.4f}"
+                    
                     st.metric(
                         "Energy",
-                        f"{np.trapz(u[-1, :]**2, x):.4f}",
-                        delta=f"{np.trapz(u[-1, :]**2, x) - np.trapz(u[0, :]**2, x):.4f}",
-                        help="Total energy in system"
+                        energy_text,
+                        delta=energy_delta,
+                        help="Total energy in system (trapezoidal integration)"
                     )
                     st.markdown('</div>', unsafe_allow_html=True)
-                
+
                 with col4:
                     st.markdown('<div class="metric-card">', unsafe_allow_html=True)
                     st.metric(
@@ -421,7 +436,7 @@ with tab1:
                         help="Spatial × Temporal points"
                     )
                     st.markdown('</div>', unsafe_allow_html=True)
-                
+                                
                 # 3D Surface Plot
                 st.markdown("### 🎭 Time Evolution (3D View)")
                 

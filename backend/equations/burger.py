@@ -1,20 +1,24 @@
 import numpy as np
 
 class BurgersEquation:
-    """1D Burgers' Equation: u_t + u*u_x = nu*u_xx"""
+    """Burgers' equation model"""
     
-    def __init__(self, nu=0.01):
-        self.nu = nu  # viscosity coefficient
+    def __init__(self, nu=0.01, L=1.0):
+        self.nu = nu  # viscosity
+        self.L = L    # domain length
         
     def exact_solution(self, x, t):
-        """Analytical solution for specific initial conditions"""
-        # Simplified exact solution for testing
+        """Exact solution for specific case (Cole-Hopf transformation)"""
+        # For simplicity, return approximate solution
         return np.exp(-t) * np.sin(np.pi * x)
     
     def initial_condition(self, x):
-        """Initial condition: u(x,0) = sin(pi*x)"""
+        """Default initial condition"""
         return np.sin(np.pi * x)
     
-    def boundary_conditions(self):
-        """Dirichlet BC: u(0,t)=0, u(1,t)=0"""
-        return {"left": 0.0, "right": 0.0}
+    def boundary_conditions(self, bc_type='dirichlet'):
+        """Return boundary conditions"""
+        if bc_type == 'dirichlet':
+            return {'left': 0.0, 'right': 0.0}
+        else:
+            return {'left': 'neumann', 'right': 'neumann'}

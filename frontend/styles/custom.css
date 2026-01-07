@@ -1,0 +1,34 @@
+/* Save this as frontend/styles/custom.css */
+.main-header {
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, #1E3A8A, #3B82F6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.sub-header {
+    color: #4B5563;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.method-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid #E2E8F0;
+    margin: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.section-title {
+    color: #1E3A8A;
+    border-bottom: 2px solid #3B82F6;
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
